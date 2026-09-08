@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Муравьи - варианты правок, 8 сентября</title>
+<style>
+  :root {
+    --ink: #1d1b18; --dim: #6b655c; --line: #ded7cc; --bg: #f7f4ee;
+    --card: #fff; --accent: #b4531c; --ok: #2f7d32;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 16px/1.6 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 32px 20px 80px; }
+  h1 { font-size: 30px; line-height: 1.2; margin: 0 0 6px; }
+  h2 { font-size: 23px; margin: 0 0 4px; }
+  .lede { color: var(--dim); margin: 0 0 28px; }
+  section { background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+            padding: 22px 22px 26px; margin: 22px 0; }
+  .ask { border-left: 3px solid var(--accent); padding: 6px 0 6px 14px; margin: 14px 0 18px;
+         color: #4a443c; font-style: italic; }
+  .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  figure { margin: 0; }
+  figure img, figure video { width: 100%; display: block; border: 1px solid var(--line);
+                             border-radius: 10px; background: #ded7cc; }
+  figcaption { margin-top: 8px; font-size: 14px; }
+  .tag { display: inline-block; font-size: 12px; letter-spacing: .04em; text-transform: uppercase;
+         padding: 2px 8px; border-radius: 20px; border: 1px solid var(--line); color: var(--dim); }
+  .tag.now { border-color: #c9bfae; background: #f1ece2; }
+  .tag.rec { border-color: #a8cba9; background: #eaf5ea; color: var(--ok); }
+  table { border-collapse: collapse; margin: 14px 0 4px; font-size: 15px; }
+  td, th { border-bottom: 1px solid var(--line); padding: 6px 16px 6px 0; text-align: left; }
+  th { color: var(--dim); font-weight: 600; }
+  code { background: #f1ece2; padding: 1px 6px; border-radius: 5px; font-size: 14px; }
+  .note { color: var(--dim); font-size: 14.5px; }
+  audio { width: 100%; margin-top: 6px; }
+  .foot { color: var(--dim); font-size: 14px; margin-top: 34px; border-top: 1px solid var(--line);
+          padding-top: 18px; }
+  .rec-line { margin: 16px 0 0; padding: 12px 14px; background: #f3f8f3; border-radius: 10px;
+              border: 1px solid #dcebdc; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Муравьи: варианты правок</h1>
+<p class="lede">
+  По списку от 8 сентября (тема <b>ants</b>, Daniil Konev). Каждая правка сделана
+  <b>вариантом</b>, а не насовсем: игра по умолчанию работает ровно как сейчас, а варианты
+  включаются отдельно. Ниже видно, как было и как стало.
+  <br><b>Боевую версию не трогал</b> - черновик на Яндексе остался тот же, что был.
+</p>
+
+
+<section>
+  <h2>1. Лапы у муравьёв</h2>
+  <div class="ask">«Если они нарисованы кодом, то добавить им простенькую анимацию конечностей»</div>
+  <p>Муравей и правда рисуется кодом. Лапы у него были <b>неподвижные</b> - шесть отрезков
+  постоянной формы; двигалось только тело, покачиванием вбок, и это покачивание из оригинала.
+  У оригинала лапы тоже стоят на месте.</p>
+  <p>Сделал <b>трипод</b> - так ходит настоящее насекомое: три лапы переносятся, три держат,
+  потом наоборот. Лапа при этом не просто скользит вперёд-назад, а <b>вытягивается на выносе и
+  подбирается на опоре</b>. Фаза у каждого муравья своя, поэтому колонна не марширует в ногу,
+  а частота та же, что у покачивания тела, поэтому животное движется одним куском.</p>
+
+  <p class="note"><b>Первая версия была слишком слабой, и это померено, а не на глаз.</b>
+  Ход лапы был 0.07 длины тела и давал 0.475 из 255 - при том что между двумя соседними
+  кадрами картинка и без всякой походки меняется на 2.071. То есть правка была вчетверо
+  меньше движения, которое уже есть. Сейчас ход 0.15 плюс вынос, и <b>показано крупно</b>:
+  муравей на полном кадре занимает 70 px из 1920, а лапа - штрих в 2.8 px, на таком кадре
+  нельзя увидеть никакую походку.</p>
+
+  <h3 style="margin:18px 0 8px;font-size:18px">Один муравей, крупно</h3>
+  <div class="grid">
+    <figure><video src="media/ant-0.mp4" poster="media/ant-0-poster.png" autoplay loop muted playsinline></video><figcaption><span class="tag now">сейчас</span> Вариант 0 - как сейчас, лапы стоят</figcaption></figure>
+    <figure><video src="media/ant-1.mp4" poster="media/ant-1-poster.png" autoplay loop muted playsinline></video><figcaption>Вариант 1 - лёгкая походка</figcaption></figure>
+    <figure><video src="media/ant-2.mp4" poster="media/ant-2-poster.png" autoplay loop muted playsinline></video><figcaption><span class="tag rec">рекомендую</span> Вариант 2 - заметная походка</figcaption></figure>
+  </div>
+
+  <h3 style="margin:22px 0 8px;font-size:18px">Кусок доски у норы, увеличение 3x</h3>
+  <div class="grid">
+    <figure><video src="media/walk-0.mp4" poster="media/walk-0-poster.png" autoplay loop muted playsinline></video><figcaption><span class="tag now">сейчас</span> Вариант 0</figcaption></figure>
+    <figure><video src="media/walk-1.mp4" poster="media/walk-1-poster.png" autoplay loop muted playsinline></video><figcaption>Вариант 1</figcaption></figure>
+    <figure><video src="media/walk-2.mp4" poster="media/walk-2-poster.png" autoplay loop muted playsinline></video><figcaption><span class="tag rec">рекомендую</span> Вариант 2</figcaption></figure>
+  </div>
+
+  <h3 style="margin:22px 0 8px;font-size:18px">И тот же уровень целиком, для контекста</h3>
+  <div class="grid">
+    <figure><video src="media/legs-0.mp4" poster="media/legs-0-poster.png" autoplay loop muted playsinline></video><figcaption><span class="tag now">сейчас</span> Вариант 0</figcaption></figure>
+    <figure><video src="media/legs-1.mp4" poster="media/legs-1-poster.png" autoplay loop muted playsinline></video><figcaption>Вариант 1</figcaption></figure>
+    <figure><video src="media/legs-2.mp4" poster="media/legs-2-poster.png" autoplay loop muted playsinline></video><figcaption><span class="tag rec">рекомендую</span> Вариант 2</figcaption></figure>
+  </div>
+  <p class="rec-line"><b>Рекомендую вариант 2.</b> Правка на пять строк, риска ноль, а
+  оживает вся картинка разом - муравьёв на экране десятки.</p>
+</section>
+
+
+<section>
+  <h2>2. Звук</h2>
+  <div class="ask">«Музыка и звуки очень резкие, надо явно с ними поработать»</div>
+  <p>Это третья жалоба на звук подряд, и все три - на <b>разные наборы</b>. Поэтому вместо
+  четвёртой замены я померил, <b>сколько раз в секунду</b> звуки реально запускаются в живой
+  игре:</p>
+  <table>
+    <tr><th>уровень</th><th>pop</th><th>eat</th><th>land</th></tr>
+    <tr><td>1</td><td>3.8/с</td><td>3.8/с</td><td>3.8/с</td></tr>
+    <tr><td>12</td><td>4.3/с</td><td>4.0/с</td><td>3.8/с</td></tr>
+    <tr><td>40</td><td>9.7/с</td><td>9.7/с</td><td>9.7/с</td></tr>
+  </table>
+  <p>На сороковом уровне это <b>тридцать щелчков в секунду</b> сплошным потоком, без пауз.
+  Резкость даёт частота, а не тембр отдельного звука: старая защита не пускала один и тот же
+  звук дважды за кадр, то есть разрешала шестьдесят в секунду.</p>
+  <p>Вариант 1 ставит минимальный промежуток 0.16 с между повторами трёх частых звуков.
+  Вариант 2 вдобавок убирает общую громкость эффектов на 4 дБ. <b>Редкие звуки не тронуты</b>
+  - ключ, камень, победа: их игрок как раз должен слышать.</p>
+  <div class="grid">
+    <figure>
+      <audio controls src="media/sfx-0.ogg"></audio>
+      <figcaption><span class="tag now">сейчас</span> Вариант 0 - как сейчас, −16.3 дБ</figcaption>
+    </figure>
+    <figure>
+      <audio controls src="media/sfx-1.ogg"></audio>
+      <figcaption>Вариант 1 - прореженный, −20.2 дБ</figcaption>
+    </figure>
+    <figure>
+      <audio controls src="media/sfx-2.ogg"></audio>
+      <figcaption><span class="tag rec">рекомендую</span> Вариант 2 - прореженный и тише, −24.2 дБ</figcaption>
+    </figure>
+  </div>
+  <p class="note">Шесть секунд сорокового уровня, собранные из <b>тех же файлов</b>, что в игре,
+  с теми же громкостями и на измеренной частоте. Это модель, а не запись с экрана: компрессора
+  игры в ней нет, поэтому обе стороны чуть жёстче настоящих - одинаково.</p>
+  <p class="rec-line"><b>Рекомендую вариант 2.</b> И это тот случай, когда менять сам набор
+  звуков в четвёртый раз бесполезно.</p>
+</section>
+
+
+<section>
+  <h2>3. Шрифт</h2>
+  <div class="ask">«Шрифт какой-нибудь можно поинтересней, либо побольше его сделать»</div>
+  <p>Латиницу набирает Lilita One - <b>шрифт самого оригинала</b>. Кириллицы в нём нет, и
+  каждая русская буква молча падает в системный гротеск. То есть русский текст в игре набран
+  не выбранным шрифтом, а <b>подстановкой по умолчанию</b> - отсюда и ощущение.</p>
+  <p>Вариант 1 добавляет Rubik 900: тоже шрифт Google под той же лицензией, тяжёлый и с теми
+  же скруглениями, кириллический набор - 7 кБ. Латиница при этом остаётся Lilita One, меняются
+  только русские буквы.</p>
+  <div class="grid">
+    <figure><img src="media/title-0.png" alt=""><figcaption><span class="tag now">сейчас</span> Вариант 0 - как сейчас</figcaption></figure>
+    <figure><img src="media/title-1.png" alt=""><figcaption><span class="tag rec">рекомендую</span> Вариант 1 - кириллический дисплейный</figcaption></figure>
+  </div>
+  <div class="grid" style="margin-top:16px">
+    <figure><img src="media/card-0.png" alt=""><figcaption>Настройки сейчас</figcaption></figure>
+    <figure><img src="media/card-1.png" alt=""><figcaption>Настройки с новым шрифтом</figcaption></figure>
+  </div>
+  <p class="rec-line"><b>Рекомендую вариант 1.</b> Хорошо видно на «УРОВЕНЬ 12 ПРОЙДЕН!»:
+  сейчас цифры набраны одним шрифтом, а буквы другим, и это заметно.</p>
+</section>
+
+
+<section>
+  <h2>4. Кнопка звука на экране</h2>
+  <div class="ask">«Было бы хорошо добавить кнопку отключения звука сюда» (стрелка в правый верхний угол)</div>
+  <p>Сейчас звук только в настройках, за шестерёнкой - как в оригинале, там такой кнопки нет
+  вообще. Сделать легко, но <b>правый верхний угол занят</b>: на скриншоте был первый уровень,
+  где он пустой, а с четвёртого там стоит панель X2.</p>
+  <p>Поэтому два варианта размещения. Кнопка гасит и звуки, и музыку разом - кто тянется к
+  перечёркнутому динамику, хочет тишины, а не «выключить эффекты, оставить музыку».</p>
+  <div class="grid">
+    <figure><img src="media/hud-0.png" alt=""><figcaption><span class="tag now">сейчас</span> Вариант 0 - как сейчас, только шестерёнка</figcaption></figure>
+    <figure><img src="media/hud-1.png" alt=""><figcaption><span class="tag rec">рекомендую</span> Вариант 1 - слева от панели X2</figcaption></figure>
+    <figure><img src="media/hud-2.png" alt=""><figcaption>Вариант 2 - под шестерёнкой</figcaption></figure>
+  </div>
+  <p class="rec-line"><b>Рекомендую вариант 1</b> - рядом с X2 читается как пара кнопок, и
+  палец на телефоне тянется туда же. Но это вкус, а не замер: скажите, какой.</p>
+</section>
+
+
+<section>
+  <h2>5. Фон</h2>
+  <div class="ask">«Фон скучноватый, его не трудно сделать сейчас, но это сразу даст игроку
+  понимание, что игра не треш»</div>
+  <p>Сейчас это <b>одна плоская краска</b>, (217,208,196), снятая с кадра оригинала. Он прав
+  по ощущению, и особенно на десктопе, где доска занимает узкую полосу, а всё остальное - этот
+  цвет.</p>
+  <p>Вариант 1 кладёт затемнение к краям, вариант 2 добавляет ещё точечную сетку. Ни то, ни
+  другое не трогает доску, лоток и их цвета - рисуется под всем остальным.</p>
+
+  <p class="note"><b>Первая версия почти ничего не делала, и это померено.</b> Точечная сетка
+  при радиусе 3.5 на шаге 64 покрывает 0.9% площади - ровно столько пикселей и менялось,
+  средняя разница 0.05 из 255, то есть варианты 1 и 2 были неотличимы. Затемнение доходило
+  только до самых углов (максимум 26 из 255). Сейчас: затемнение <b>9.48 из 255 на 78%
+  площади</b>, сетка - шаг 40 при радиусе 5, две краски, покрытие около 9%.</p>
+
+  <h3 style="margin:18px 0 8px;font-size:18px">Пустой стол слева от доски, 1:1, без уменьшения</h3>
+  <figure>
+    <img src="media/_crop.png" alt="">
+    <figcaption>слева направо: как сейчас · затемнение · затемнение и сетка</figcaption>
+  </figure>
+
+  <h3 style="margin:22px 0 8px;font-size:18px">Целиком, десктоп 1920x1080</h3>
+  <div class="grid" style="grid-template-columns:1fr">
+    <figure><img src="media/bg-0.png" alt=""><figcaption><span class="tag now">сейчас</span> Вариант 0 - как сейчас, плоский стол</figcaption></figure>
+    <figure><img src="media/bg-1.png" alt=""><figcaption><span class="tag rec">рекомендую</span> Вариант 1 - затемнение к краям</figcaption></figure>
+    <figure><img src="media/bg-2.png" alt=""><figcaption>Вариант 2 - затемнение и точечная текстура</figcaption></figure>
+  </div>
+  <p class="rec-line"><b>Рекомендую вариант 1</b>, и с оговоркой, которая важнее самой правки:
+  это <b>самая дорогая правка в списке</b>. Все 24 числа отрисовки в проекте меряют нас против
+  кадра оригинала, и новый фон эту базу обнуляет. То есть после неё мы перестаём быть копией и
+  начинаем быть своей игрой - это нормальное решение, но принять его надо вслух.</p>
+</section>
+
+
+<p class="foot">
+  Снято со сборки от 8 сентября, тем же кодом, которым игра рисует себе экран - это не
+  макеты, а настоящие кадры. Слева всегда то, что сейчас в черновике.<br>
+  Играбельную версию с переключателями можно выложить отдельно - скажи, если нужно.
+</p>
+
+</div>
+</body>
+</html>
